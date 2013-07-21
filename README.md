@@ -58,15 +58,17 @@ The `t` fn handles translations. You give it a config map which includes your di
     :en-US      {:example {:foo ":en-US :example/foo text"}}
     :en-US-var1 {:example {:foo ":en-US-var1 :example/foo text"}}}
 
-   :log-missing-translation-fn (fn [{:keys [dev-mode? locale ks]}] ...)})
+   :log-missing-translation-fn (fn [{:keys [dev-mode? locale ks]}]
+                                #_ "stuff to be added here..."
+                                )})
 
-(t :en-US :example/foo) => ":en-US :example/foo text"
-(t :en    :example/foo) => ":en :example/foo text"
-(t :en    :example/greeting "Steve") => "Hello Steve, how are you?"
+(t :en-US :example/foo) ;=> ":en-US :example/foo text"
+(t :en    :example/foo) ;=> ":en :example/foo text"
+(t :en    :example/greeting "Steve") ;=> "Hello Steve, how are you?"
 
 ;;; Translation strings are escaped and parsed as inline Markdown:
-(t :en :example/with-markdown) => "&lt;tag&gt;<strong>strong</strong>&lt;/tag&gt;"
-(t :en :example/with-exclaim)  => "<tag>**strong**</tag>" ; Notice no "!" suffix here, only in dictionary map
+(t :en :example/with-markdown) ;=> "&lt;tag&gt;<strong>strong</strong>&lt;/tag&gt;"
+(t :en :example/with-exclaim)  ;=> "<tag>**strong**</tag>" ; Notice no "!" suffix here, only in dictionary map
 ```
 
 It's simple to get started, but there's a number of advanced features for if/when you need them:
@@ -76,6 +78,7 @@ It's simple to get started, but there's a number of advanced features for if/whe
 **Reloading dictionaries on modification**: Just make sure `:dev-mode? true` is in your config, and you're good to go!
 
 **Scoping translations**: Use `with-tscope` if you're calling `t` repeatedly within a specific translation-namespace context:
+
 ```clojure
 (with-tscope :example
   [(t :en :foo)
@@ -103,21 +106,20 @@ In all cases, translation requests are logged upon fallback to default locale or
 
 Check out `fmt`, `parse`, `lsort`, `fmt-str`, `fmt-msg`:
 ```clojure
-(tower/fmt   :en-ZA 200       :currency) => "R 200.00"
-(tower/fmt   :en-US 200       :currency) => "$200.00"
-(tower/parse :en-US "$200.00" :currency) => 200
-
-(tower/fmt :de-DE 2000.1 :number)     => "2.000,1"
-(tower/fmt :de-DE (Date.))            => "12.06.2012"
-(tower/fmt :de-DE (Date.) :date-long) => "12. Juni 2012"
-(tower/fmt :de-DE (Date.) :dt-long)   => "12 giugno 2012 16.48.01 ICT"
+(tower/fmt   :en-ZA 200       :currency)        ;=> "R 200.00"
+(tower/fmt   :en-US 200       :currency)        ;=> "$200.00"
+(tower/parse :en-US "$200.00" :currency)        ;=> 200
+(tower/fmt :de-DE 2000.1 :number)               ;=> "2.000,1"
+(tower/fmt :de-DE (java.util.Date.))            ;=> "12.06.2012"
+(tower/fmt :de-DE (java.util.Date.) :date-long) ;=> "12. Juni 2012"
+(tower/fmt :de-DE (java.util.Date.) :dt-long)   ;=> "12 giugno 2012 16.48.01 ICT"
 
 (tower/lsort :pl ["Warsaw" "Kraków" "Łódź" "Wrocław" "Poznań"])
-=> ("Kraków" "Łódź" "Poznań" "Warsaw" "Wrocław")
+;=> ("Kraków" "Łódź" "Poznań" "Warsaw" "Wrocław")
 
 (mapv #(tower/fmt-msg :de "{0,choice,0#no cats|1#one cat|1<{0,number} cats}" %)
         (range 5))
-=> ["no cats" "one cat" "2 cats" "3 cats" "4 cats"]
+;=> ["no cats" "one cat" "2 cats" "3 cats" "4 cats"]
 ```
 
 Yes, seriously- it's that simple. See the appropriate docstrings for details.
