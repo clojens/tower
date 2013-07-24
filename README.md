@@ -45,7 +45,7 @@ If you are the adventurous type, use the following dependency in your project, b
 
 ## Setup instructions
 
-Tower [artifacts][artifacts] are [released][release] to [Clojars][clojars] and it's the default repository for [Leiningen][lein], but you can use it with other build tools like [Maven][mvn] exclusively as well.
+Tower [artifacts][artifacts] are [released to [Clojars][release] and it's the default repository for [Leiningen][lein], but you can use it with other build tools like [Maven][mvn] exclusively as well.
 
 ### Installation using Leiningen
 
@@ -233,3 +233,4 @@ Copyright &copy; 2012, 2013 Peter Taoussanis. Distributed under the [Eclipse Pub
 [release]: <https://clojars.org/com.taoensso/tower>
 [pom]: <http://maven.apache.org/guides/introduction/introduction-to-the-pom.html#What_is_a_POM>
 [devnotes]: <#development-notes>
+[lein]: <https://github.com/technomancy/leiningen>
