@@ -125,8 +125,11 @@ The `t` function handles translations in Tower API `v1`. You give it a config ma
                                 )})
 
 ;;; Translation strings are escaped and parsed as inline Markdown:
-(t :en my-tconfig :example/with-markdown) ;=> "&lt;tag&gt;<strong>strong</strong>&lt;/tag&gt;"
-(t :en my-tconfig :example/with-exclaim)  ;=> "<tag>**strong**</tag>" ; Notice no "!" suffix here, only in dictionary map
+(t :en my-tconfig :example/with-markdown)
+;=> "&lt;tag&gt;<strong>strong</strong>&lt;/tag&gt;"
+
+(t :en my-tconfig :example/with-exclaim)
+;=> "<tag>**strong**</tag>" ; Notice no "!" suffix here, only in dictionary map
 
 (t :en-US my-tconfig :example/foo)              ;=> ":en-US :example/foo text"
 (t :en    my-tconfig :example/foo)              ;=> ":en :example/foo text"
