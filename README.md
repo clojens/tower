@@ -35,7 +35,7 @@ If you know your way around the Clojure landscape, you'll know enough to use the
 [com.taoensso/tower "1.7.1"]
 ```
 
-### Development version API v2 **breaking**
+### Development API v2 `breaking`
 
 If you are the adventurous type, use the following dependency in your project, but please make sure to read the [development notes][devnotes]:
 
