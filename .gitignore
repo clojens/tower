@@ -11,3 +11,4 @@ pom.xml
 *.sh
 .lein*
 .env
+nohup.out
